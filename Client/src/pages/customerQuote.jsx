@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/customerQuote.css';
 import CustomerNav from '../components/customerNav';
 
@@ -28,92 +29,72 @@ export default function CustomerQuote() {
   };
 
   return (
-    <div className="quote-container">
-      <header className="quote-header">
+    <div className="customer-quote-wrapper">
+      <header className="customer-quote-header">
         <CustomerNav />
       </header>
 
-      <main className="quote-main">
-        <aside className="quote-sidebar">
-          <div className="quote-ticket-card">
-            <div className="quote-ticket-header">Selected Ticket: {ticket.id}</div>
-            <div className="quote-ticket-detail">{ticket.title}</div>
-
-            <div className="quote-ticket-info">
-              <div className="quote-info-row">
-                <span className="quote-info-label">Type:</span>
-                <span className="quote-info-value">{ticket.type}</span>
-              </div>
-              <div className="quote-info-row">
-                <span className="quote-info-label">Severity:</span>
-                <span className="quote-info-value">{ticket.severity}</span>
-              </div>
-              <div className="quote-info-row">
-                <span className="quote-info-label">Deadline:</span>
-                <span className="quote-info-value">{ticket.deadline}</span>
-              </div>
-              <div className="quote-info-row">
-                <span className="quote-info-label">Users Affected:</span>
-                <span className="quote-info-value">{ticket.usersAffected}</span>
+      <main className="customer-quote-main p-3">
+        <div className="row g-3 h-100">
+          <div className="col-auto d-flex flex-column align-self-start">
+            <div className="card customer-quote-ticket-card">
+              <div className="card-body">
+                <h6 className="fw-bold">Selected Ticket: {ticket.id}</h6>
+                <p className="text-muted">{ticket.title}</p>
+                <p className="mb-1"><span className="text-muted">Type:</span> <strong>{ticket.type}</strong></p>
+                <p className="mb-1"><span className="text-muted">Severity:</span> <strong>{ticket.severity}</strong></p>
+                <p className="mb-1"><span className="text-muted">Deadline:</span> <strong>{ticket.deadline}</strong></p>
+                <p className="mb-1"><span className="text-muted">Users Affected:</span> <strong>{ticket.usersAffected}</strong></p>
+                <p className="mt-2 mb-0">
+                  <span className="fw-bold">Status: </span>
+                  <span className="badge customer-quote-status-badge">{ticket.status}</span>
+                </p>
               </div>
             </div>
-
-            <div className="quote-status">
-              <span className="quote-status-label">Status:</span>
-              <span className="quote-status-badge">{ticket.status}</span>
-            </div>
+            <button className="btn customer-quote-change-btn w-100 mt-2">Change Ticket</button>
           </div>
 
-          <button className="quote-change-ticket-btn">Change Ticket</button>
-        </aside>
+          <div className="col customer-quote-main-card p-3 d-flex flex-column">
+            <h4 className="text-white fw-semibold mb-3">Quote Estimate</h4>
+            <div className="row g-3 flex-grow-1">
+              <div className="col d-flex flex-column gap-3">
+                <div className="customer-quote-inner-card p-3 flex-grow-1">
+                  <h6 className="text-white fw-semibold mb-3">Quote Breakdown</h6>
+                  {quoteBreakdown.map((item, i) => (
+                    <div key={i} className="d-flex justify-content-between py-2 customer-quote-breakdown-row">
+                      <span className="text-white">{item.task}</span>
+                      <span className="customer-quote-hours">{item.hours}</span>
+                    </div>
+                  ))}
+                </div>
 
-        <div className="quote-big-card">
-          <h1 className="quote-title">Quote Estimate</h1>
-
-          <div className="quote-layout">
-            <div className="quote-section">
-
-              <div className="quote-breakdown-display">
-                <h3 className="quote-section-title">Quote Breakdown</h3>
-                {quoteBreakdown.map((item, i) => (
-                  <div className="quote-breakdown-row" key={i}>
-                    <span className="quote-breakdown-task">{item.task}</span>
-                    <span className="quote-breakdown-hours">{item.hours}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="quote-cost-summary">
-                <h3 className="quote-cost-title">Cost Summary</h3>
-                <div className="quote-cost-grid">
-                  <div className="quote-cost-row">
-                    <span className="quote-cost-label">Hourly Rate:</span>
-                    <span className="quote-cost-value">{costSummary.hourlyRate}</span>
-                  </div>
-                  <div className="quote-cost-row">
-                    <span className="quote-cost-label">Total Cost:</span>
-                    <span className="quote-cost-value quote-cost-highlight">{costSummary.totalCost}</span>
-                  </div>
-                  <div className="quote-cost-row">
-                    <span className="quote-cost-label">Severity:</span>
-                    <span className="quote-cost-value">{costSummary.severity}</span>
-                  </div>
-                  <div className="quote-cost-row">
-                    <span className="quote-cost-label">Estimated Time:</span>
-                    <span className="quote-cost-value">{costSummary.estimatedTime}</span>
+                <div className="customer-quote-inner-card p-3">
+                  <h6 className="text-white fw-semibold mb-3">Cost Summary</h6>
+                  <div className="row g-2">
+                    {[
+                      ['Hourly Rate', costSummary.hourlyRate, false],
+                      ['Total Cost', costSummary.totalCost, true],
+                      ['Severity', costSummary.severity, false],
+                      ['Estimated Time', costSummary.estimatedTime, false],
+                    ].map(([label, value, highlight]) => (
+                      <div className="col-6 d-flex justify-content-between" key={label}>
+                        <span className="customer-quote-cost-label">{label}:</span>
+                        <span className={highlight ? 'customer-quote-highlight' : 'text-white fw-semibold'}>{value}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
 
-            </div>
+              <div className="col-auto d-flex flex-column justify-content-center customer-quote-actions p-3">
+                <button className="btn customer-quote-btn-accept w-100">Accept Quote</button>
+                <button className="btn customer-quote-btn-modify w-100 mt-2">Modify Quote</button>
+                <button className="btn customer-quote-btn-decline w-100 mt-2">Decline Quote</button>
+              </div>
 
-            <div className="quote-customer-actions">
-              <button className="quote-btn-accept">Accept Quote</button>
-              <button className="quote-btn-modify">Modify Quote</button>
-              <button className="quote-btn-decline">Decline Quote</button>
             </div>
-
           </div>
+
         </div>
       </main>
     </div>
