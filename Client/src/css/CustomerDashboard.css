@@ -12,108 +12,41 @@ html, body, #root {
   overflow-x: hidden;
 }
 
-.customer-dashboard-wrapper {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+.customer-dashboard {
+  width: 100%;
+  min-height: 100vh;
   background-color: var(--giacom-dark-blue);
-  overflow: hidden;
 }
 
-.customer-dashboard-header {
-  padding: 1.5rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(135, 35, 107, 0.2);
-  flex-shrink: 0;
-}
-
-.customer-dashboard-header span {
-  color: #d1d5db;
-  font-size: 1rem;
-}
-
-.customer-dashboard-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 2rem;
-}
-
-.customer-stat-card {
+.stat-card {
   background-color: var(--giacom-purple);
   border: none;
-  border-radius: 16px;
-  text-align: center;
+  color: white;
   transition: all 0.3s ease;
 }
 
-.customer-stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(236, 0, 140, 0.3);
+.stat-card:hover {
+  box-shadow: 0 0 10px #bc52c2, 0 0 20px #bc52c2;
 }
 
-.customer-stat-label {
-  color: white;
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-  font-weight: 500;
-}
-
-.customer-stat-count {
-  color: white;
-  font-size: 4rem;
-  font-weight: bold;
-  margin: 0;
-}
-
-.customer-create-ticket-btn {
+.create-ticket-btn {
   background-color: var(--giacom-pink);
-  border-radius: 16px;
-  padding: 1.5rem;
-  text-align: center;
-  cursor: pointer;
-  margin-bottom: 2rem;
-  transition: all 0.2s ease;
-}
-
-.customer-create-ticket-btn:hover {
-  transform: translateY(-2px);
-}
-
-.customer-create-ticket-btn p {
+  border-radius: 10px;
+  padding: 20px;
   color: white;
-  font-size: 1.125rem;
-  margin: 0;
-  font-weight: 500;
 }
 
-.customer-quick-links-section {
-  margin-top: auto;
+.create-ticket-btn:hover {
+  opacity: 0.9;
 }
 
-.customer-quick-links-title {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-}
-
-.customer-quick-link-card {
+.quick-link-card {
   background-color: var(--giacom-purple);
   border: none;
-  border-radius: 16px;
-  text-align: center;
   color: white;
-  font-size: 1.5rem;
-  font-weight: 500;
   transition: all 0.3s ease;
 }
 
-.customer-quick-link-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(236, 0, 140, 0.3);
+.quick-link-card:hover {
+  box-shadow: 0 0 10px #bc52c2, 0 0 20px #bc52c2;
 }

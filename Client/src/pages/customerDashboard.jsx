@@ -13,59 +13,53 @@ export default function CustomerDashboard() {
   ];
 
   return (
-    <div className="customer-dashboard-wrapper">
-      <header className="customer-dashboard-header">
-        <CustomerNav />
-      </header>
+    <div className="customer-dashboard">
+      <CustomerNav />
 
-      <main className="customer-dashboard-main">
-        <div className="container-fluid px-0">
-        <div className="row g-4 mb-4">
+      <div className="container text-center" style={{ paddingTop: '100px' }}>
+
+        <div className="row mb-4">
           {stats.map((stat, idx) => (
             <div key={idx} className="col-4">
-              <div className="card customer-stat-card">
+              <div className="card stat-card">
                 <div className="card-body">
-                  <h3 className="customer-stat-label">{stat.label}</h3>
-                  <p className="customer-stat-count">{stat.count}</p>
+                  <p style={{ fontSize: '20px' }}>{stat.label}</p>
+                  <p style={{ fontSize: '40px', fontWeight: 'bold' }}>{stat.count}</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        </div>
 
         <Link to="/ticketForm" style={{ textDecoration: 'none' }}>
-          <div className="customer-create-ticket-btn">
-            <p>Create a New Ticket</p>
+          <div className="create-ticket-btn mb-4">
+            <p style={{ margin: 0, fontSize: '20px' }}>Create a New Ticket</p>
           </div>
         </Link>
 
-        <div className="customer-quick-links-section">
-          <h2 className="customer-quick-links-title">Quick Links</h2>
-          <div className="row g-4">
-            <div className="col-6">
-              <Link to="/ticketsPage" style={{ textDecoration: 'none' }}>
-                <div className="card customer-quick-link-card">
-                  <div className="card-body">
-                    <p>My Tickets</p>
-                  </div>
+        <p style={{ color: 'white', fontWeight: 'bold', fontSize: '24px' }}>Quick Links</p>
+        <div className="row">
+          <div className="col-6">
+            <Link to="/ticketsPage" style={{ textDecoration: 'none' }}>
+              <div className="card quick-link-card">
+                <div className="card-body">
+                  <p style={{ fontSize: '20px' }}>My Tickets</p>
                 </div>
-              </Link>
-            </div>
-            
-            <div className="col-6">
-              <Link to="/customerQuote" style={{ textDecoration: 'none' }}>
-                <div className="card customer-quick-link-card">
-                  <div className="card-body">
-                    <p>My Quotes</p>
-                  </div>
+              </div>
+            </Link>
+          </div>
+          <div className="col-6">
+            <Link to="/customerQuote" style={{ textDecoration: 'none' }}>
+              <div className="card quick-link-card">
+                <div className="card-body">
+                  <p style={{ fontSize: '20px' }}>My Quotes</p>
                 </div>
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
         </div>
 
-      </main>
+      </div>
     </div>
   );
 }
