@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/TicketForm.css';
 import { useNavigate } from 'react-router-dom';
 import CustomerNav from '../components/customerNav';
@@ -6,88 +7,106 @@ import CustomerNav from '../components/customerNav';
 export default function TicketForm() {
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({
-    type: 'Support',
-    title: '',
-    description: '',
-    severity: 'Low',
-    impact: 'Low',
-    date: '',
-    users: '',
-    file: null,
-  });
-
-  const set = (key, val) => setForm(p => ({ ...p, [key]: val }));
+  const [type, setType] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [severity, setSeverity] = useState('');
+  const [impact, setImpact] = useState('');
+  const [date, setDate] = useState('');
+  const [users, setUsers] = useState('');
 
   return (
-    <div className="ticket-container">
-      <header className="ticket-header">
-        <CustomerNav />
-      </header>
+    <div className="ticket-form">
+      <CustomerNav />
 
-      <main className="ticket-main">
-        <div className="ticket-card">
-          <h1 className="ticket-title">Ticket Submission</h1>
+      <div className="container" style={{ paddingTop: '100px' }}>
+        <div className="row">
+          <div className="col-6 mx-auto">
+        <div className="card ticket-form-card">
+          <div className="card-body">
+            <h1 style={{ color: 'white', fontSize: '30px', marginBottom: '20px' }}>Ticket Submission</h1>
 
-          <div className="ticket-field">
-            <label>Ticket Type</label>
-            <select value={form.type} onChange={e => set('type', e.target.value)}>
-              <option>Support</option>
-              <option>Incident</option>
-              <option value="Enhancement">Enhancement / Feature</option>
-            </select>
-          </div>
-
-          <div className="ticket-field">
-            <label>Title</label>
-            <input type="text" placeholder="Brief description" value={form.title} onChange={e => set('title', e.target.value)} />
-          </div>
-
-          <div className="ticket-field">
-            <label>Description</label>
-            <textarea placeholder="Describe your issue or request" value={form.description} onChange={e => set('description', e.target.value)} />
-          </div>
-
-          <div className="ticket-row">
-            <div className="ticket-field">
-              <label>Severity</label>
-              <select value={form.severity} onChange={e => set('severity', e.target.value)}>
-                {['Low', 'Medium', 'High', 'Critical'].map(o => <option key={o}>{o}</option>)}
-              </select>
+            <div className="mb-3">
+              <label style={{ color: 'white' }}>Ticket Type</label>
+              <div className="dropdown">
+                <button className="btn dropdown-toggle w-100 text-start ticket-dropdown" type="button" data-bs-toggle="dropdown">
+                  {type || 'Select Type'}
+                </button>
+                <ul className="dropdown-menu ticket-dropdown-menu w-100">
+                  <li><button className="dropdown-item" onClick={() => setType('Support')}>Support</button></li>
+                  <li><button className="dropdown-item" onClick={() => setType('Incident')}>Incident</button></li>
+                  <li><button className="dropdown-item" onClick={() => setType('Enhancement / Feature')}>Enhancement / Feature</button></li>
+                </ul>
+              </div>
             </div>
-            <div className="ticket-field">
-              <label>Business Impact</label>
-              <select value={form.impact} onChange={e => set('impact', e.target.value)}>
-                {['Low', 'Medium', 'High', 'Critical'].map(o => <option key={o}>{o}</option>)}
-              </select>
-            </div>
-          </div>
 
-          <div className="ticket-row">
-            <div className="ticket-field">
-              <label>Date of Issue</label>
-              <input type="date" value={form.date} onChange={e => set('date', e.target.value)} />
+            <div className="mb-3">
+              <label style={{ color: 'white' }}>Title</label>
+              <input type="text" className="form-control ticket-input" placeholder="Briefly describe the issue" value={title} onChange={e => setTitle(e.target.value)} />
             </div>
-            <div className="ticket-field">
-              <label>Users Affected</label>
-              <input type="number" min="0" placeholder="Enter number" value={form.users} onChange={e => set('users', e.target.value)} />
+
+            <div className="mb-3">
+              <label style={{ color: 'white' }}>Description</label>
+              <textarea className="form-control ticket-input" rows="3" value={description} onChange={e => setDescription(e.target.value)}></textarea>
             </div>
-          </div>
 
-          <div className="ticket-field">
-            <label>Attachments</label>
-            <label className="ticket-file">
-              <input type="file" hidden onChange={e => set('file', e.target.files[0])} />
-              <span>{form.file ? form.file.name : 'Choose a file'}</span>
-            </label>
-          </div>
+            <div className="row mb-3">
+              <div className="col-6">
+                <label style={{ color: 'white' }}>Severity</label>
+                <div className="dropdown">
+                  <button className="btn dropdown-toggle w-100 text-start ticket-dropdown" type="button" data-bs-toggle="dropdown">
+                    {severity || 'Select Severity'}
+                  </button>
+                  <ul className="dropdown-menu ticket-dropdown-menu w-100">
+                    <li><button className="dropdown-item" onClick={() => setSeverity('Low')}>Low</button></li>
+                    <li><button className="dropdown-item" onClick={() => setSeverity('Medium')}>Medium</button></li>
+                    <li><button className="dropdown-item" onClick={() => setSeverity('High')}>High</button></li>
+                    <li><button className="dropdown-item" onClick={() => setSeverity('Critical')}>Critical</button></li>
+                  </ul>
+                </div>
+              </div>
+              <div className="col-6">
+                <label style={{ color: 'white' }}>Business Impact</label>
+                <div className="dropdown">
+                  <button className="btn dropdown-toggle w-100 text-start ticket-dropdown" type="button" data-bs-toggle="dropdown">
+                    {impact || 'Select Impact'}
+                  </button>
+                  <ul className="dropdown-menu ticket-dropdown-menu w-100">
+                    <li><button className="dropdown-item" onClick={() => setImpact('Low')}>Low</button></li>
+                    <li><button className="dropdown-item" onClick={() => setImpact('Medium')}>Medium</button></li>
+                    <li><button className="dropdown-item" onClick={() => setImpact('High')}>High</button></li>
+                    <li><button className="dropdown-item" onClick={() => setImpact('Critical')}>Critical</button></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
 
-          <div className="ticket-actions">
-            <button className="ticket-btn-ghost" onClick={() => navigate(-1)}>Cancel</button>
-            <button className="ticket-btn-primary" onClick={() => console.log('Submit:', form)}>Submit Ticket</button>
+            <div className="row mb-3">
+              <div className="col-6">
+                <label style={{ color: 'white' }}>Date of Issue</label>
+                <input type="date" className="form-control ticket-input" value={date} onChange={e => setDate(e.target.value)} />
+              </div>
+              <div className="col-6">
+                <label style={{ color: 'white' }}>Users Affected</label>
+                <input type="number" className="form-control ticket-input" min="0" placeholder="Enter number" value={users} onChange={e => setUsers(e.target.value)} />
+              </div>
+            </div>
+
+            <div className="mb-3">
+              <label style={{ color: 'white' }}>Attachments</label>
+              <input className="form-control ticket-input" type="file" multiple />
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '20px' }}>
+              <button className="btn ticket-btn-cancel" onClick={() => navigate(-1)}>Cancel</button>
+              <button className="btn ticket-btn-submit" onClick={() => console.log('Submit')}>Submit Ticket</button>
+            </div>
+
           </div>
         </div>
-      </main>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

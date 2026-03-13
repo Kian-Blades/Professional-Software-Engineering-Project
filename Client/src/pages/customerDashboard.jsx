@@ -2,11 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/CustomerDashboard.css';
-import { useNavigate } from 'react-router-dom';
 import CustomerNav from '../components/customerNav';
 
 export default function CustomerDashboard() {
-  const navigate = useNavigate();
 
   const stats = [
     { label: 'Pending Tickets', count: 3 },
@@ -14,52 +12,54 @@ export default function CustomerDashboard() {
     { label: 'Resolved Tickets', count: 3 }
   ];
 
-  const routes = {
-    createTicket: '/tickets/create',
-    myTickets: '/tickets',
-    myQuotes: '/quotes'
-  };
-
   return (
-    <div className="dashboard-container">
-      <header className="dashboard-header">
-        {/* <img src="/giacom-master-white-logo-1.png" alt="GIACOM" className="header-logo" />
-        <span>Welcome [User]</span> */}
-        <CustomerNav />
-      </header>
+    <div className="customer-dashboard">
+      <CustomerNav />
 
-      <main className="dashboard-main">
-        <div className="stats-grid">
+      <div className="container text-center" style={{ paddingTop: '100px' }}>
+
+        <div className="row mb-4">
           {stats.map((stat, idx) => (
-            <div key={idx} className="stat-card">
-              <h3>{stat.label}</h3>
-              <p className="stat-number">{stat.count}</p>
+            <div key={idx} className="col-4">
+              <div className="card stat-card">
+                <div className="card-body">
+                  <p style={{ fontSize: '20px' }}>{stat.label}</p>
+                  <p style={{ fontSize: '40px', fontWeight: 'bold' }}>{stat.count}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
 
         <Link to="/ticketForm" style={{ textDecoration: 'none' }}>
-          <div className="cta-button" onClick={() => console.log('Navigate to:', routes.createTicket)}>
-            <p>Create a New Ticket</p>
+          <div className="create-ticket-btn mb-4">
+            <p style={{ margin: 0, fontSize: '20px' }}>Create a New Ticket</p>
           </div>
         </Link>
 
-        <div className="quick-links-section">
-          <h2 className="quick-links-title">Quick Links</h2>
-          <div className="quick-links-grid">
-            <Link to="/ticketsPage" style={{ textDecoration: 'none' }} className="quick-link-btn">
-              <button onClick={() => console.log('Navigate to:', routes.myTickets)} className="quick-link-btn">
-                My Tickets
-              </button>
+        <p style={{ color: 'white', fontWeight: 'bold', fontSize: '24px' }}>Quick Links</p>
+        <div className="row">
+          <div className="col-6">
+            <Link to="/ticketsPage" style={{ textDecoration: 'none' }}>
+              <div className="card quick-link-card">
+                <div className="card-body">
+                  <p style={{ fontSize: '20px' }}>My Tickets</p>
+                </div>
+              </div>
             </Link>
-            <Link to="/customerQuote" style={{ textDecoration: 'none' }} className="quick-link-btn">
-              <button onClick={() => console.log('Navigate to:', routes.myQuotes)} className="quick-link-btn">
-                My Quotes
-              </button>
+          </div>
+          <div className="col-6">
+            <Link to="/customerQuote" style={{ textDecoration: 'none' }}>
+              <div className="card quick-link-card">
+                <div className="card-body">
+                  <p style={{ fontSize: '20px' }}>My Quotes</p>
+                </div>
+              </div>
             </Link>
           </div>
         </div>
-      </main>
+
+      </div>
     </div>
   );
 }
