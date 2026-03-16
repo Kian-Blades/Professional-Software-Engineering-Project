@@ -9,7 +9,6 @@ import CustomerQuote from './pages/customerQuote';
 import QuoteGenerator from './pages/quoteGenerator';
 import ViewTicket from './pages/viewTicket';
 // Temporary pages
-import DashCust from './pages/custDash2';
 import TestTicket from './pages/viewTicket2';
 
 function App() {
@@ -26,7 +25,6 @@ function App() {
         <Route path="/adminQuote" element={<QuoteGenerator />} />
         <Route path="/viewTicket" element={<ViewTicket />} />
         {/* Temporary pages */}
-        <Route path="/dashcust" element={<DashCust />}/>
         <Route path="/viewTestTicket/:id" element={<TestTicket />}/>
       </Routes>
     </BrowserRouter>
