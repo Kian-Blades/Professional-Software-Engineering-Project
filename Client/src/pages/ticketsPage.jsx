@@ -4,12 +4,14 @@ import '../css/ticketsPage.css';
 import AdminNav from '../components/adminNav';
 
 export default function TicketsPage() {
-  return (
-    
-    <div className="tickets-page">
+  const [tickets, setTickets] = useState([]);
+  const [error, setError] = useState("");
+<div className="tickets-page">
 
       <AdminNav />
 
+      <div className="container-fluid">
+        {error && <div style={{ color: "red" }}>{error}</div>}
 
       <div className="container-fluid text-center">
         <div className="row align-items-center">
@@ -70,5 +72,5 @@ export default function TicketsPage() {
 
       <footer className="footer" />
     </div>
-  );
+</div>  
 }

@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import LandingPage from './pages/landingPage';
 import CustomerDashboard from './pages/customerDashboard';
-import TicketCreateForm from './pages/ticket';
+import TicketForm from './pages/ticketForm';
 import AdminDashboard from './pages/adminDashboard';
 import TicketsPage from './pages/ticketsPage';
 import CustomerQuote from './pages/customerQuote';
@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/customer" element={<CustomerDashboard />} />
-        <Route path="/ticketForm" element={<TicketCreateForm />} />
+        <Route path="/ticketForm" element={<TicketForm />} />
         <Route path="/ticketsPage" element={<TicketsPage />} />
         <Route path="/customerQuote" element={<CustomerQuote/>} />
         <Route path="/adminQuote" element={<QuoteGenerator />} />
