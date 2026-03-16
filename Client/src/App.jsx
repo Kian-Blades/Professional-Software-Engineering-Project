@@ -9,7 +9,7 @@ import CustomerQuote from './pages/customerQuote';
 import QuoteGenerator from './pages/quoteGenerator';
 import ViewTicket from './pages/viewTicket';
 // Temporary pages
-import DashAdmin from './pages/AdminDash2';
+import DashAdmin from './pages/adminDash2';
 import DashCust from './pages/custDash2';
 
 function App() {

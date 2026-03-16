@@ -47,40 +47,24 @@ export default function DashAdmin() {
 
       <AdminNav />
 
-      <div class="container text-center">
-        <div className="row align-items-center">
-
-          <div className="col">
-              <div className="stats-grid">
-          {labels.map((stat, idx) => (
-            <div key={idx} className="stat-card">
-                <h3>{stat.label}</h3>
-                <p className="stat-number">{stat.count}</p>
-            </div>
-          ))}
-        </div>
+      <div className="container text-center">
+  <div className="row justify-content-center">
+    {[
+      { label: 'Active Tickets', count: stats.active, colorClass: 'active-tickets' },
+      { label: 'Pending Tickets', count: stats.pending, colorClass: 'pending-tickets' },
+      { label: 'Resolved Tickets', count: stats.resolved, colorClass: 'resolved-tickets' }
+    ].map((stat, idx) => (
+      <div key={idx} className="col-md-4 mb-3">
+        <div className={`card ${stat.colorClass}`} style={{ minHeight: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="card-body">
+            <h3 style={{ fontSize: '20px', marginBottom: '10px' }}>{stat.label}</h3>
+            <p style={{ fontSize: '40px', fontWeight: 'bold', margin: 0 }}>{stat.count}</p>
           </div>
-
-          <div className="col">
-            <div className="card pending-tickets">
-              <div class="card-body">
-                <p style={{fontSize: '20px'}}>Pending Tickets</p>
-                <p style={{fontSize: '40px', fontWeight: 'bold'}}>5</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="col">
-            <div className="card resolved-tickets">
-              <div className="card-body">
-                <p style={{fontSize: '20px'}}>Resolved Tickets</p>
-                <p style={{fontSize: '40px', fontWeight: 'bold'}}>16</p>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
+    ))}
+  </div>
+</div>
 
       <div className="container text-center">
         <p className='quick-links'>Quick Links</p>
