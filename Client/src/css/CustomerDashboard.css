@@ -18,35 +18,36 @@ html, body, #root {
   background-color: var(--giacom-dark-blue);
 }
 
-.stat-card {
-  background-color: var(--giacom-purple);
-  border: none;
-  color: white;
-  transition: all 0.3s ease;
+.customer-dashboard .card {
+    background-color: var(--giacom-purple);
+    margin-top: 10px;
+    color: white;
+    transition: all 0.3s ease;
 }
 
-.stat-card:hover {
+.customer-dashboard .stat-card:hover {
   box-shadow: 0 0 10px #bc52c2, 0 0 20px #bc52c2;
 }
 
-.create-ticket-btn {
+.customer-dashboard .create-ticket-btn {
   background-color: var(--giacom-pink);
   border-radius: 10px;
   padding: 20px;
   color: white;
+  width: 100%;
 }
 
-.create-ticket-btn:hover {
+.customer-dashboard .create-ticket-btn:hover {
   opacity: 0.9;
 }
 
-.quick-link-card {
+.customer-dashboard .quick-link-card {
   background-color: var(--giacom-purple);
   border: none;
   color: white;
   transition: all 0.3s ease;
 }
 
-.quick-link-card:hover {
+.customer-dashboard .quick-link-card:hover {
   box-shadow: 0 0 10px #bc52c2, 0 0 20px #bc52c2;
 }
