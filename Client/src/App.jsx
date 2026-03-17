@@ -8,6 +8,7 @@ import TicketsPage from './pages/ticketsPage';
 import CustomerQuote from './pages/customerQuote';
 import QuoteGenerator from './pages/quoteGenerator';
 import ViewTicket from './pages/viewTicket';
+import LoginPage from './pages/loginPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/customerQuote" element={<CustomerQuote/>} />
         <Route path="/adminQuote" element={<QuoteGenerator />} />
         <Route path="/viewTicket" element={<ViewTicket />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );
