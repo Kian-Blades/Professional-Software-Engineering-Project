@@ -28,15 +28,25 @@ export default function CustomerDashboard() {
         <CustomerNav />
       </header>
 
-      <main className="dashboard-main">
-        <div className="stats-grid">
-          {stats.map((stat, idx) => (
-            <div key={idx} className="stat-card">
-              <h3>{stat.label}</h3>
-              <p className="stat-number">{stat.count}</p>
-            </div>
-          ))}
+      <main className="container py-5">
+              <div className="container text-center">
+  <div className="row justify-content-center">
+    {[
+      { label: 'Active Tickets', count: stats.active, colorClass: 'active-tickets' },
+      { label: 'Pending Tickets', count: stats.pending, colorClass: 'pending-tickets' },
+      { label: 'Resolved Tickets', count: stats.resolved, colorClass: 'resolved-tickets' }
+    ].map((stat, idx) => (
+      <div key={idx} className="col-md-4 mb-3">
+        <div className={`card ${stat.colorClass}`} style={{ minHeight: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="card-body">
+            <h3 style={{ fontSize: '20px', marginBottom: '10px' }}>{stat.label}</h3>
+            <p style={{ fontSize: '40px', fontWeight: 'bold', margin: 0 }}>{stat.count}</p>
+          </div>
         </div>
+      </div>
+    ))}
+  </div>
+</div>
 
         <Link to="/ticketForm" style={{ textDecoration: 'none' }}>
           <div className="cta-button" onClick={() => console.log('Navigate to:', routes.createTicket)}>
