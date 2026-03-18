@@ -1,17 +1,62 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { ticketsApi } from '../api/tickets.api';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/CustomerDashboard.css';
 import { useNavigate } from 'react-router-dom';
 import CustomerNav from '../components/customerNav';
 
-export default function CustomerDashboard() {
+export default function DashCust() {
   const navigate = useNavigate();
 
-  const stats = [
-    { label: 'Pending Tickets', count: 3 },
-    { label: 'Active Tickets', count: 3 },
-    { label: 'Resolved Tickets', count: 3 }
+  const [stats, setStats] = useState({
+    pending: 0,
+    active: 0,
+    resolved: 0
+  });
+
+  useEffect(() => {
+    // LOGIC FOR STATUSES
+    // const fetchStats = async () => {
+    //     try {
+    //         const tickets = await ticketsApi.list();
+
+    //         const counts = {
+    //             pending: tickets.filter(t => t.status === 'Pending').length,
+    //             active: tickets.filter(t => t.status === 'Active').length,
+    //             resolved: tickets.filter(t => t.status === 'Resolved').length
+    //         };
+
+    //         setStats(counts);
+    //     } catch (error) {
+    //         console.error('Error fetching ticket stats:', error);
+    //     }
+    // };
+
+    //TEMPORARY LOGIC USING SEVERITY INSTEAD OF STATUS
+    const fetchStats = async () => {
+        try {
+            const tickets = await ticketsApi.list();
+            const allTickets = Array.isArray(tickets) ? tickets : [];
+            const counts = {
+                pending: allTickets.filter(t => t.severity == 1).length,
+                active: allTickets.filter(t => t.severity == 2).length,
+                resolved: allTickets.filter(t => t.severity == 3 || t.severity == 4).length
+            };
+
+            setStats(counts);
+        } catch (error) {
+            console.error('Error fetching ticket stats:', error);
+        }
+    };
+
+    fetchStats();
+  }, []);
+
+  const labels = [
+    { label: 'Pending Tickets', count: stats.pending },
+    { label: 'Active Tickets', count: stats.active },
+    { label: 'Resolved Tickets', count: stats.resolved }
   ];
 
   const routes = {
@@ -21,13 +66,12 @@ export default function CustomerDashboard() {
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="customer-dashboard">
       <header className="dashboard-header">
-        {/* <img src="/giacom-master-white-logo-1.png" alt="GIACOM" className="header-logo" />
-        <span>Welcome [User]</span> */}
         <CustomerNav />
       </header>
 
+      {/* Adding a Bootstrap container to center content and add padding */}
       <main className="container py-5">
               <div className="container text-center">
   <div className="row justify-content-center">
@@ -48,24 +92,24 @@ export default function CustomerDashboard() {
   </div>
 </div>
 
-        <Link to="/ticketForm" style={{ textDecoration: 'none' }}>
-          <div className="cta-button" onClick={() => console.log('Navigate to:', routes.createTicket)}>
-            <p>Create a New Ticket</p>
-          </div>
-        </Link>
+        {/* Create Ticket Button Area */}
+        <div className="text-center mb-5">
+          <Link to="/ticketForm" style={{ textDecoration: 'none' }}>
+            <div className="create-ticket-btn d-inline-block">
+               Create a New Ticket
+            </div>
+          </Link>
+        </div>
 
-        <div className="quick-links-section">
-          <h2 className="quick-links-title">Quick Links</h2>
-          <div className="quick-links-grid">
-            <Link to="/ticketsPage" style={{ textDecoration: 'none' }} className="quick-link-btn">
-              <button onClick={() => console.log('Navigate to:', routes.myTickets)} className="quick-link-btn">
+        {/* Quick Links Section */}
+        <div className="quick-links-section text-center">
+          <h2 className="mb-4" style={{color: 'white', fontWeight: 'bold'}}>Quick Links</h2>
+          <div className="row justify-content-center gap-3">
+            <Link to="/ticketsPage" className="col-md-3 card quick-link-card p-4 text-decoration-none">
                 My Tickets
-              </button>
             </Link>
-            <Link to="/customerQuote" style={{ textDecoration: 'none' }} className="quick-link-btn">
-              <button onClick={() => console.log('Navigate to:', routes.myQuotes)} className="quick-link-btn">
+            <Link to="/customerQuote" className="col-md-3 card quick-link-card p-4 text-decoration-none">
                 My Quotes
-              </button>
             </Link>
           </div>
         </div>
