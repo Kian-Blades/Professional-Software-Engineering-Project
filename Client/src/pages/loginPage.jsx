@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { accountsApi } from
+import { accountsApi } from '../api/accounts.api';
 import { Link } from 'react-router-dom';
 import giacomLogo from '../assets/giacom-master-white-logo-1.png'; 
 import '../css/loginPage.css';
@@ -38,12 +38,6 @@ export default function LoginPage() {
         }
     };
 
-    const fetchUser = async () => {
-        try {
-            const userName = await accountsApi.
-            const password
-        }
-    }
 
 
     return (
