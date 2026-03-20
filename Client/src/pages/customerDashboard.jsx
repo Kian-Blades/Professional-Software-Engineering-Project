@@ -44,7 +44,7 @@ export default function DashCust() {
 
             const tickets = await ticketsApi.list();
             const allTickets = Array.isArray(tickets) ? tickets : [];
-            const userTickets = allTickets.filter(t => t.account_id === storedUser.id);
+            const userTickets = allTickets.filter(t => t.account_Id === storedUser.id);
             const counts = {
                 pending: userTickets.filter(t => t.severity == 1).length,
                 active: userTickets.filter(t => t.severity == 2).length,
